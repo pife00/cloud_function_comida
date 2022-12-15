@@ -52,13 +52,3 @@ toSend = {
     "kilos_comidos":kilos_comidos,
     "porcentaje_en_bulto": porcentaje_en_bulto,
     }
-
-#print(valor_por_bulto)
-
-
-
-
-
-
-#gramos_iniacion = bulto_kilo * 1000
-##print(gramos_iniacion)
