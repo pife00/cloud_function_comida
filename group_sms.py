@@ -1,14 +1,14 @@
 import pandas as pd
-from datetime import date
+import datetime
 def groupSms(debts):
     
-    data = pd.DataFrame.from_dict(debts['sms'])
+    data = pd.DataFrame.from_dict(debts['noInclude'])
     
-    #data['date'] = data['date'].apply(lambda x:'{}'.format(date(x)))
-    data['product'] = data['product'].str.upper() + ' '
-    print(data['date'])
-    """ 
-    testValue = data.groupby('name').agg(sum_value=('value', 'sum'),
+    data['date'] = data['date'].apply(lambda x:noUnixTime(x))+","
+    data['product'] = data['product']+","
+   
+    
+    testValue = data.groupby('name').agg(value=('value', 'sum'),
                                      product=('product', 'sum'),
                                      date=('date', 'sum')
                                      )
@@ -18,7 +18,12 @@ def groupSms(debts):
     testValue = testValue.reset_index()
     testValue['contact'] = tel['contact']
     
-    print(testValue) """
-    #return testValue
+    
+    testValue = testValue.to_json(orient='records')
+    return testValue
+    
 
-    return 'Hello'
+
+def noUnixTime(data):
+    mydate = datetime.datetime.fromtimestamp(data/1000).strftime('%b/%y')
+    return mydate
